@@ -2,8 +2,8 @@
 import time
 import json
 import os
-from tqdm import tqdm
 
+from tqdm import tqdm
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
@@ -104,7 +104,7 @@ class HollyshopCrawling:
         Crawl multiple listing pages and collect product review links.
 
         Iterates from page 1 to `self.max_hollyshop`, extracts the first
-        rated product link from each page, saves results to `{self.path}.json`,
+        rated product link from each page, saves results to JSON,
         and respects a short delay between requests.
         '''
         hollyshop_products = []
@@ -184,7 +184,7 @@ class HollyshopCrawling:
 
         Reads links from `{self.path}.json`, fetches and parses each page,
         accumulates review records, periodically persists a pickle file
-        (`{self.path}.pkl`) and finally saves a CSV (`{self.path}.csv`).
+        and finally saves a CSV.
         '''
         hollyshop_aggregated_reviews = []
         hollyshop_products = self.read_links_from_json()

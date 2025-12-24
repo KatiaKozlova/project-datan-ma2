@@ -15,8 +15,8 @@ class GraphBuilder:
     tokens (e.g., ":smile: :thumbs_up:").
 
     Attributes:
-        reviews (pandas.DataFrame): Input DataFrame with at least an 'emojis' column.
-        graph (networkx.Graph): The resulting emoji graph (created by `build_graph`).
+        reviews (pandas.DataFrame): Input DataFrame with an 'emojis' column.
+        graph (networkx.Graph): The resulting emoji graph.
     '''
     def __init__(self, reviews: pd.DataFrame):
         '''
@@ -54,7 +54,9 @@ class GraphBuilder:
             collections.Counter where keys are 2-tuples of emoji strings
             (emoji_a, emoji_b) and values are integer counts.
         '''
-        self.reviews["emoji_list"] = self.reviews["emojis"].apply(self.parse_emojis)
+        self.reviews["emoji_list"] = self.reviews["emojis"].apply(
+            self.parse_emojis
+        )
         edge_counter = Counter()
 
         for emojis in self.reviews["emoji_list"]:
@@ -77,7 +79,7 @@ class GraphBuilder:
 
         Returns:
             A `networkx.Graph` with nodes representing emojis and edges
-            labeled by `weight`; node attribute `frequency` stores usage counts.
+            labeled by `weight`; node attribute `frequency` stores counts.
         '''
         edge_counter = self.create_nodes()
 
